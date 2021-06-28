@@ -24,5 +24,5 @@ Route::group(['prefix' => '/admin','middleware'=>['auth']], function () {
     Route::resource('dashboards', 'DashboardController'); 
 });
 
-Auth::routes(['verify'=>true]); 
+Auth::routes(); 
 Route::match(['get', 'post'], '/home', 'HomeController@index')->name('home');
