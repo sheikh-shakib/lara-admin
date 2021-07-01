@@ -3,6 +3,15 @@
 <form action="{{route('users.update',$user->id)}}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
+      @if ($errors->any())
+      <div class="alert alert-danger">
+        <ul>
+          @foreach ($errors->all() as $error)
+              <li>{{$error}}</li>
+          @endforeach
+        </ul>
+      </div>
+      @endif
     <div class="form-row align-items-center">
       <div class="col-md-12">
         <label  for="inputUserName">Name</label>

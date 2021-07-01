@@ -38,6 +38,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validateData=$request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'password'=>'required',
+            'city'=>'required',
+            'phone'=>'required',
+            'photo'=>'required',
+        ]);
         $user=[
             'name'=>$request->name,
             'email'=>$request->email,
@@ -101,6 +109,11 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validateData=$request->validate([
+            'name'=>'required',
+            'email'=>'required|email',
+            'email'=>'required',
+        ]);
         $user=\App\User::find($id);
             $user->name = $request->name;
             $user->email = $request->email;
