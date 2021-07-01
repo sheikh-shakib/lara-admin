@@ -9,7 +9,7 @@
       </div>
       <div class="col-md-12">
         <label class="sr-only" for="inputCategoryName">Content</label>
-        <textarea type="text" class="form-control mb-2" id="inputCategoryContent" name="content" placeholder="Content"></textarea>
+        <textarea type="text" class="form-control mb-2" id="" name="content" placeholder="Content"></textarea>
       </div>
       <div class="col-md-12">
         <label class="sr-only" for="inputCategoryName">Thumbnail</label>

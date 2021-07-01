@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use App\UserProfile;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -42,6 +43,20 @@ class LoginController extends Controller
     {
         return 'name';
     }
+    /**
+     * The user has been authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if (!in_array('Admin',$user->roles->pluck('name')->toArray())) {
+            $this->redirectTo='/home';
+        }
+    }
+
 
 
 }

@@ -18,6 +18,7 @@
             <th>Title</th>
             <th>Author</th>
             <th>Posts</th>
+            <th>Category</th>
             <th>Created At</th>
             <th>Updated At</th>
             <th>Actions</th>
@@ -30,6 +31,7 @@
                 <td>{{$post->title}}</td>
                 <td>{{$post->user->name}}</td>
                 <td>{{$post->content}}</td>
+                <td>{{$post->category->title ?? 'n/a'}}</td>
                 <td>{{$post->created_at}}</td>
                 <td>{{$post->updated_at}}</td>
                 <td>

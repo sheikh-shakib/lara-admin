@@ -13,11 +13,11 @@
 Route::view('', 'welcome', ['name' => 'Sheikh Shakib']);
 
 //Resource Controller For CMS
-Route::group(['prefix' => '/admin','middleware'=>['auth']], function () {
+Route::group(['prefix' => '/admin','middleware'=>['auth','can:isAdmin']], function () {
     Route::view('', 'dashboard/admin');
     Route::resource('posts','PostController');
     Route::resource('pages', 'PageController');
-    Route::resource('users', 'UserController',['middleware'=>'password.confirm']);
+    Route::resource('users', 'UserController');
     Route::resource('profiles', 'UserProfileController');
     Route::resource('categories', 'CategoryController');
     Route::resource('roles', 'RoleController'); 

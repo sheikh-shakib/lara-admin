@@ -17,6 +17,10 @@ class Post extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
     // public static function boot(){
     //     parent::boot();
     //     static::addGlobalScope('vfu',function(Builder $builder){

@@ -77,7 +77,13 @@ class RegisterController extends Controller
             'city'=>'none'
         ]);
         $user->profile()->save($userprofile);
-        $user->roles()->attach(2);
+        if ($user->id==1) {
+            $user->roles()->attach(1);
+        } else {
+            $user->roles()->attach(2);
+        }
+        
+        
         return $user;
     }
 

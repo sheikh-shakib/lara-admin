@@ -99836,7 +99836,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tinymce__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(tinymce__WEBPACK_IMPORTED_MODULE_0__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! ../../node_modules/tinymce/themes/silver */ "./node_modules/tinymce/themes/silver/index.js");
+__webpack_require__(/*! tinymce/themes/silver */ "./node_modules/tinymce/themes/silver/index.js");
 
 
 tinymce__WEBPACK_IMPORTED_MODULE_0___default.a.init({
@@ -99911,8 +99911,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Xampp\htdocs\l6app\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Xampp\htdocs\l6app\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\lara-admin\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\lara-admin\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

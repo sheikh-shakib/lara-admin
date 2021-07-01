@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use App\User;
 use App\Http\Requests\sakib;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Gate;
-
+use Illuminate\Auth\Events\Validated;
 
 class PostController extends Controller
 {
@@ -44,7 +45,7 @@ class PostController extends Controller
     //     ['city' => 'jamalpur'],
     //     ['id' => '5']
     // );
-        $posts=Post::with(['user'])->get();
+        $posts=Post::with(['user','category'])->get();
         return view('dashboard.posts.index', compact('posts'));
     
     }
@@ -56,8 +57,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $categories=Category::all();
 
-       return view('dashboard.posts.create');
+       return view('dashboard.posts.create',compact('categories'));
 
     }
 
@@ -69,14 +71,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $response=Gate::inspect('create',$post);
-        if ($response->denied()) {
-            return redirect()->back()->with('msg',$response->message());
-        }
+        $validateData=$request->validate([
+            'title'=>'required',
+            'content'=>'required',
+            'category_id'=>'required',
+        ]);
         $post=new Post;
         $post->title=$request->title;
         $post->content=$request->content;
         $post->user_id=Auth::user()->id;
+        $post->category_id=$request->category_id;
         $post->save();
         return redirect()->route('posts.index');
     }
@@ -103,11 +107,11 @@ class PostController extends Controller
     {
        $post=Post::find($id);
     //    Gate::authorize('allow-edit',$post->user->id);
-        $response=Gate::inspect('update',$post);
-        if ($response->denied()) {
-            return redirect()->back()->with('msg',$response->message());
-        }
-       return view('dashboard.posts.edit', compact('post'));
+        // if ($response->denied()) {
+        //     return redirect()->back()->with('msg',$response->message());
+        // }
+         $categories=Category::all();
+       return view('dashboard.posts.edit', compact('post','categories'));
     }
 
     /**
@@ -119,13 +123,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response=Gate::inspect('update',$post);
-        if ($response->denied()) {
-            return redirect()->back()->with('msg',$response->message());
-        }
+        $validateData=$request->validate([
+            'title'=>'required',
+            'content'=>'required',
+            'category_id'=>'required',
+        ]);
         $post=Post::find($id);
         $post->title=$request->title;
         $post->content=$request->content;
+        $post->category_id=$request->category_id;
         $post->user_id=Auth::user()->id;
         $post->save();
         return redirect()->route('posts.index');
@@ -140,10 +146,10 @@ class PostController extends Controller
     public function destroy($id){
         $post=Post::find($id);
         // Gate::authorize('allow-edit',$post->user->id);
-        $response=Gate::inspect('delete',$post);
-        if ($response->denied()) {
-            return redirect()->back()->with('msg',$response->message());
-        }
+        // $response=Gate::inspect('delete',$post);
+        // if ($response->denied()) {
+        //     return redirect()->back()->with('msg',$response->message());
+        // }
         $deleted=$post->delete();
         if ($deleted) {
             return redirect()->route('posts.index');
